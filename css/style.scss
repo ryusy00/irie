@@ -1,0 +1,626 @@
+// 변수 정의
+$primary-color: #337912;
+$font-family-main: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+$font-family-banner: "Actor", sans-serif;
+$banner-color: #337912;
+$animation-duration: 4s;
+$main-banner-bg: url("../images/sky-bg.jpg");
+body {
+    font-family: $font-family-main;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+.custom-cursor {
+    position: absolute;
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    background-color: #337912;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+@media (max-width: 991px) {
+    .custom-cursor {
+        display: none;
+    }
+}
+// 헤더 스타일
+header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent !important;
+    transition: background-color 0.3s ease;
+
+    &.scrolled {
+        background-color: rgba(248, 249, 250, 0.8) !important;
+    }
+    nav {
+        padding-right: 5%;
+    }
+    .navbar-nav {
+        display: flex; 
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: center; 
+        margin: 0; 
+        padding: 0; 
+        list-style: none; 
+    }
+    .nav-item {
+        margin-right: 30px;
+        text-align: center;
+    }
+    .nav-link {
+        color: #454545 !important;
+    }
+    .nav-link:hover {
+        color: #222 !important;
+    }
+}
+// 모바일 화면에서 적용될 네비게이션 바 스타일
+@media (max-width: 991px) {
+    .navbar-collapse {
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        background-color: rgba(0, 0, 0, 0.7); 
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100; 
+        overflow: auto; 
+        opacity: 0; 
+        visibility: hidden; 
+        transition: opacity 0.3s ease, visibility 0.3s ease; 
+    }
+    .navbar-collapse.show {
+        opacity: 1; 
+        visibility: visible; 
+    }
+    .navbar-toggler {
+        background-color: white; 
+        border: none; 
+        z-index: 101; 
+        color: black; 
+        i {
+            font-size: 1.5rem; 
+        }
+    }
+    .navbar-collapse.show + .navbar-toggler.active {
+        background-color: black; 
+        color: white; 
+        border-color: white; 
+
+        i {
+            color: white; 
+        }
+        .navbar-light .navbar-toggler {
+            color: #fff !important;
+            border-color: #fff !important;
+        }
+    }
+    .navbar-toggler.active {
+        background-color: black; 
+        color: white; 
+        i {
+            color: white; 
+        }
+    }
+    .navbar-nav {
+        text-align: center; 
+    }
+    .nav-link {
+        color: white !important; 
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.5rem;
+        width: 100%; 
+        border-bottom: 1px solid #444; 
+    }
+    .dropdown-menu {
+        background-color: #333; 
+        color: white; 
+        border: none;
+        padding: 0;
+        margin: 0;
+        position: relative; 
+    }
+    .dropdown-item {
+        color: white; 
+        padding: 15px; 
+    }
+    .dropdown-item:hover {
+        background-color: #444; 
+    }
+    .ml-auto, .mx-auto {
+        margin-right: auto !important;
+    }
+    .dropdown, .dropleft, .dropright, .dropup {
+        line-height: 60px;
+    }
+    .navbar-nav .dropdown-menu {
+        line-height: 30px;
+    }
+}
+
+
+
+// 변수 정의
+@mixin absolute-center($top, $left) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    transform: translate(-50%, -50%);
+}
+
+// 메인 배너 스타일
+#main-banner {
+    width: 100%;
+    height: 100vh;
+    background: $main-banner-bg top no-repeat;
+    background-size: 100% 50vh;
+    position: relative;
+
+    > p {
+        @include absolute-center(65%, 50%);
+        width: auto;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 1.5rem;
+        letter-spacing: 0.5rem;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 2px solid;
+        animation: typing $animation-duration steps(60, end), blink-caret 0.75s step-end infinite;
+
+        > span {
+            font-weight: bold;
+        }
+    }
+
+    .irie {
+    @include absolute-center(50%, 50%);
+        display: flex;
+        align-items: center;
+        font-family: $font-family-banner;
+        font-size: 10rem;
+        opacity: 0;
+        animation: fade 1s ease-out forwards;
+
+        > li {
+            width: 200px;
+            text-align: center;
+        }
+    }
+}
+// 메인배너 애니메이션 정의
+@keyframes fade {
+    0% {
+        top: 55%;
+        opacity: 0; 
+    }
+    100% {
+        top: 50%;
+        opacity: 1; 
+    }
+}
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 59ch;
+    }
+}
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: black;
+    }
+}
+@keyframes upAndDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.building1,
+.building2 {
+    position: absolute;
+    
+    &.building1 {
+        top: 41%;
+        left: 7%;
+        transform: translateY(-41%);
+    }
+
+    &.building2 {
+        top: 50%;
+        right: 12%;
+        transform: translateY(-50%);
+    }
+}
+
+.cloud1,
+.cloud2 {
+    position: absolute;
+
+    &.cloud1 {
+        top: 15%;
+        left: 22%;
+        animation: upAndDown 2.7s infinite ease-in-out;
+    }
+
+    &.cloud2 {
+        top: 23%;
+        right: 5%;
+        animation: upAndDown 2.2s infinite ease-in-out;
+    }
+}
+
+// 기업 소개 멘트
+#introduce-wrap {
+    width: 100%;
+    text-align: center;
+    margin-top: 10%;
+    h2 {
+        letter-spacing: 0.3rem;
+        font-size: 2.7rem;
+    }
+    p {
+        margin-top: 30px;
+        line-height: 30px;
+        span {
+            color: #337912;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+// 공통 속성
+.wrap {
+    width: 100%;
+    height: 100vh;
+    margin-top: 10%;
+}
+.title {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    h2 {
+        letter-spacing: 5px;
+        font-weight: bold;
+    }
+    p {
+        font-size: 1.1rem;
+        padding-left: 3%;
+        padding-top: 10px;
+        span {
+            font-weight: 500; 
+            &:nth-child(1) {
+                color: #337912;
+            }
+            &:nth-child(2) {
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
+
+// 사업소개
+#business-content {
+    display: flex;
+    align-items: center;
+    .business-img {
+        width: 45%;
+    }
+    .b-content {
+        width: 55%;
+        display: flex;
+        align-items: center;
+
+        .b-box, .bus-right .bu-box {
+            padding: 2.5rem;
+            height: 20rem;
+            background-color: #ededed;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);        }
+        .b-box {
+            width: 35%;
+            margin-right: 5%;
+        }
+        .bus-right {
+            width: 35%;
+            .bu-box {
+                width: 100%;
+                margin-bottom: 10%;
+            }
+        }
+        span {
+            color: #337912;
+            font-weight: 500;
+        }
+        p {
+            padding-top: 7%;
+        }
+        h3 {
+            padding-top: 2%;
+            font-weight: 550;
+        }
+        .b-box, .bu-box {
+            &:hover {
+                border: 2px solid rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+}
+
+// 연구소개
+#research-content {
+    padding-top: 3%;
+    > ul > li {
+        position: relative; 
+        overflow: hidden; 
+        width: 80%; 
+        margin-left: auto;
+        margin-right: auto;
+        height: 180px; 
+        margin-bottom: 40px;
+        display: flex; 
+        align-items: center; 
+        // justify-content: space-between; 
+        padding: 20px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        transition: all 0.5s ease; 
+    
+        // 연구소개 이미지 공통속성
+        $wrapper-width: 33.33%;
+        $transition-duration: 0.5s;
+        $border-radius: 10px;
+    
+        .img-wrapper, .img-wrapper-right {
+            position: absolute;
+            top: 0;
+            width: $wrapper-width;
+            height: 100%;
+            overflow: hidden;
+            border-radius: $border-radius;
+            z-index: 1;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transform: scaleX(0.9);
+                transition: transform $transition-duration ease;
+            }
+        }
+        .img-wrapper {
+            left: 0;
+            img {
+                transform-origin: left;
+            }
+        }
+        .img-wrapper-right {
+            right: 0;
+            img {
+                transform-origin: right;
+            }
+        }
+        h3 {
+            padding-left: 37%;
+            font-size: 1.3rem;
+            span {
+                font-weight: bold;
+                color: #337912;
+            }
+        }
+        .right {
+            padding-left: 0 !important;
+        }
+        p { width: 34.5%; padding-left: 5%;}
+        h3,
+        p {
+            z-index: 2;
+            margin: 0;
+            color: black;
+            transition: color 0.5s ease; 
+        }
+        &:hover {
+            .img-wrapper {
+                width: 100%; 
+                img { transform: scaleX(1); filter: brightness(50%); }
+            }
+            .img-wrapper-right {
+                width: 100%; 
+                img { transform: scaleX(1); filter: brightness(50%); }
+            }
+            h3 {
+                padding-left: 1.5%;
+                span { color: #fff;}
+            }
+            .right {
+                margin-left: 3%;
+            }
+            .right-p {
+                margin-left: 33% !important;
+            }
+            h3, p { color: white; }
+        }
+    }
+}
+
+// CONTACT
+.contact-wrap {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3.9rem; 
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    
+    li {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: max-content;
+        overflow: hidden;
+
+        h2 {
+            font-size: 9rem;
+            font-weight: 400;
+            letter-spacing: 2rem;
+            :nth-child(1) {
+                color: #ededed;
+            }
+        }
+
+        .notice-img,
+        .recruit,
+        .locatioin-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            aspect-ratio: 5 / 2;
+            margin-right: 2%;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: filter 0.3s ease; // 필터 전환 효과
+                &:hover {
+                    filter: brightness(50%);
+                }
+            }
+
+            span {
+                transition: opacity 0.5s ease;
+                opacity: 0;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #fff;
+                font-size: 1.3rem;
+                white-space: nowrap;
+                z-index: 1;
+                
+            }
+            &:hover span {
+                opacity: 1; // 부모 요소에 hover 시 span을 보이게 함
+            }
+        }
+    }
+    li:nth-of-type(1) h2,
+    li:nth-of-type(3) h2 {
+        color: #D1D1D1;
+    }
+    li:nth-of-type(2) {
+        align-items: flex-end;
+        text-align: right;
+        margin-left: 20%;
+    }
+}
+
+@media (max-width: 768px) { // 태블릿 이하
+    .notice-img,
+    .recruit,
+    .locatioin-img {
+      max-width: 90%; // 최대 너비를 줄여 모바일에서 적절한 크기로 조정
+    }
+    
+        span {
+        font-size: 0.7rem; // 텍스트 크기 조정
+        }
+    }
+// FOOTER
+footer {
+    background-color: #222; 
+    color: #fff; 
+    a {
+        color: #fff; 
+        text-decoration: none; 
+        &:hover {
+        text-decoration: underline; 
+        }
+    }
+    .contact {
+        p {
+            margin: 0; 
+        }
+    }   
+    .list-inline {font-size: 0.9rem !important;}
+    #site-map {
+        li {
+        margin-bottom: 10px; 
+        }
+        a {
+        color: #fff; 
+            &:hover {
+                text-decoration: underline; 
+            }
+        }
+    }
+    $container-max-widths: (
+        sm: 90%,
+        md: 85%,
+        lg: 80%,
+        xl: 80%
+    );
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl {
+        max-width: map-get($container-max-widths, sm);
+    }
+    @media (min-width: 576px) {
+        .container {
+        max-width: map-get($container-max-widths, md);
+        }
+    }
+    @media (min-width: 768px) {
+        .container {
+        max-width: map-get($container-max-widths, lg);
+        }
+    }
+    @media (min-width: 992px) {
+        .container {
+        max-width: map-get($container-max-widths, xl);
+        }
+    }
+}
+// FOOTER - copyright
+footer > p {
+    border-top: 1px solid #fff;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 25px;
+    line-height: 30px;
+}
+
